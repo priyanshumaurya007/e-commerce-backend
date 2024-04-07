@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/priyanshumaurya007/e-commerce-backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "faker": "^6.6.6",
