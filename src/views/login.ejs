@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <h2>Welcome back to Ecommerce</h2>
+    <h4>The next gen business marketplace</h4>
+    <form id="loginForm">        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <button type="button" onclick="loginUser()">Login</button>
+    </form>
+
+    <script>
+        const loginUser = async () => {
+            try {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                const formData = {
+                    useremail: email,
+                    password: password
+                };
+
+                const response = await fetch('/auth/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.status === 200) {
+                    console.log('User login successfully');
+                } else {
+                    const responseData = await response.json();
+                    throw new Error(responseData.message); 
+                }
+            } catch (error) {
+                console.error('Error logging user:', error);
+                alert('Logging failed: ' + error.message);
+            }
+        }
+
+    </script>
+</body>
+</html>
