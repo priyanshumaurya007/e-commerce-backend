@@ -23,6 +23,9 @@ app.get('/user/login', (req, res) => {
 app.get('/user/email/verification', (req, res) => {
     res.render('emailVerification');
 })
+app.get('/user/categories', (req, res) => {
+    res.render('category');
+});
 app.use('/auth', authRoutes);
 app.use('/categories', categoryRoutes);
 

@@ -47,7 +47,19 @@ const saveUserCategories = async (req, res) => {
     }
 };
 
+const fetchUserSelectedCategories = async (req, res) => {
+    try {
+        const useremail = req.user;
+        const user = await User.findByEmail(useremail);
+        res.status(200).json({message: user});
+    } catch (error) {
+        console.error('Error fetching user selected categories:', error);
+        throw new Error('Failed to fetch user selected categories');
+    }
+};
+
 module.exports = {
     getCategories,
-    saveUserCategories
+    saveUserCategories,
+    fetchUserSelectedCategories
 };

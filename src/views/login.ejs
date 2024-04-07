@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
+    <!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css"> -->
 </head>
 <body>
     <h1>Login</h1>
@@ -39,7 +40,11 @@
                 });
 
                 if (response.status === 201) {
+                    const responseData = await response.json();
+                    const token = responseData.authToken;
+                    localStorage.setItem('token', token);
                     console.log('User login successfully');
+                    window.location.href = '/user/categories';
                 } else {
                     const responseData = await response.json();
                     throw new Error(responseData.message); 
