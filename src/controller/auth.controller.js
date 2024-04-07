@@ -3,6 +3,7 @@ const auth = require('../middleware/auth.middleware');
 const UserDTO = require('../requestPayload/user-request.payload');
 const JWT_SECRET = "my_secret";
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const registerUser = async ( req, res ) => {
     try {
@@ -17,7 +18,9 @@ const registerUser = async ( req, res ) => {
             return res.status(400).json({ message: 'User email already exist' });
         }
 
-        const newUser = await User.register(userRequestPayload?.name, userRequestPayload?.useremail, userRequestPayload?.password);
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(userRequestPayload.password, saltRounds);
+        const newUser = await User.register(userRequestPayload?.name, userRequestPayload?.useremail, hashedPassword);
 
         res.status(201).json({newUser});
         
@@ -40,8 +43,10 @@ const loginUser = async ( req, res ) => {
         if(user === "User not found") {
             res.status(400).json({message: "User email doesn't exist"});
         }
+        
+        const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        if (user.password !== password ) {
+        if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
     
