@@ -20,6 +20,9 @@ app.get('/user/signup', (req, res) => {
 app.get('/user/login', (req, res) => {
     res.render('login');
 });
+app.get('/user/email/verification', (req, res) => {
+    res.render('emailVerification');
+})
 app.use('/auth', authRoutes);
 app.use('/categories', categoryRoutes);
 

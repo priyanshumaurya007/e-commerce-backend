@@ -43,7 +43,7 @@
 
                 if (response.status === 201) {
                     console.log('User registered successfully');
-                    window.location.href = 'login';
+                    window.location.href = 'email/verification';
                 } else {
                     const responseData = await response.json();
                     throw new Error(responseData.message); 

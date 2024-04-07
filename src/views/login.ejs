@@ -38,7 +38,7 @@
                     body: JSON.stringify(formData)
                 });
 
-                if (response.status === 200) {
+                if (response.status === 201) {
                     console.log('User login successfully');
                 } else {
                     const responseData = await response.json();

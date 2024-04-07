@@ -47,7 +47,7 @@ const loginUser = async ( req, res ) => {
     
         const authToken = jwt.sign({ useremail }, JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({authToken});
+        res.status(201).json({authToken});
 
     } catch (error) {
         console.log('Error logging user: ', error);
@@ -55,4 +55,23 @@ const loginUser = async ( req, res ) => {
     }
 };  
 
-module.exports = { registerUser, loginUser };
+const userEmailVerication = async ( req, res ) => {
+    try {
+        const { otp } = req.body;
+
+        if(!otp) {
+            res.status(400).json({message: 'Please provide otp'});
+        }
+
+        if(otp === '12345')
+            res.status(201).json({message: "Email verified"});
+        else
+            res.status(400).json({message: "Wrong otp send"});
+
+    } catch (error) {
+        console.log('Error logging user: ', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+};  
+
+module.exports = { registerUser, loginUser, userEmailVerication };
