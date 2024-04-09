@@ -1,4 +1,4 @@
-<video width="640" height="360" controls>
-  <source src="priyanshumaurya007_e-commerce-backend - Google Chrome 2024-04-07 21-40-22.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+
+
+https://github.com/priyanshumaurya007/e-commerce-backend/assets/74262554/ff0ce5f4-9e95-463b-a5be-778a8b4a0e42
+
